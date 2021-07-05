@@ -1,0 +1,89 @@
+
+<html>
+    <body>
+    
+    <SCRIPT LANGUAGE="JavaScript">
+    document.write('<div id="TimeShow" align="right" style="MARGIN-right:0px;font-size:9pt;font-family:宋体">?</div>');
+    var y=2021; //年 
+    var m=7; //月 
+    var d=1; //日 
+    var w=4; //星 
+    var h=14; //时 
+    var i=07; //分 
+    var s=08; //秒 
+    var hstr=istr=sstr=a='';
+    var ww = Array('日','一','二','三','四','五','六');
+    function clock(){
+     s++;
+     if (s==60) {i+=1;s=0;}//秒进位
+     if (i==60) {h+=1;i=0;}//分进位
+     if (h==24) {w+=1;d+=1;h=0;}//时进位
+     if (w==7) {w=0;}//星期进位
+     if (m==2) { //是否是二月份？
+     if (!y%4>0) { //不是闰月（二月有28天）
+     if (d==30){
+     m+=1;
+     d=1;}
+     }
+     else { //是闰月（二月有29天）
+     if (d==29){
+     m+=1;
+     d=1;}
+     }
+     }
+     else { //非2月份的月份
+     if (m==4 || m==6 || m==9 || m==11) { //只有30天的月份
+     if (d==31) {
+     m+=1;
+     d=1;}
+     }
+     else { //有31天的月份
+     if (d==32){
+     m+=1;
+     d=1;}
+     }
+     }
+     if (m==13) {y+=1;m=1;}//月进位
+     if (h < 10) {hstr=' 0'+h} else {hstr=' '+h};
+     if (i < 10) {istr=':0'+i} else {istr=':'+i};
+     if (s < 10) {sstr=':0'+s} else {sstr=':'+s};
+     if (h < 13) {astr=' am';} else {astr=' pm';};
+     TimeShow.innerHTML=y+'年'+m+'月'+d+'日 '+'星期'+ww[w]+'</font>'+hstr+istr+sstr+astr;
+     setTimeout('clock()',1000);
+    }
+    clock();
+    </SCRIPT>
+    <form action="upload_file.php" method="post"
+    enctype="multipart/form-data">
+    <label for="file">上传:</label>
+    <input type="file" name="file" id="file" /> 
+    <input type="submit" name="submit" value="Submit" />
+    </form>
+    
+    
+    
+    <table border="1"><tr><td>文件编号</td><td>文件名字</td></tr><tr><td>1</td><td>a.pcap</td></tr><tr><td>2</td><td>bx.sql</td></tr><tr><td>3</td><td>设计书_SGA设计说明书.docx</td></tr><tr><td>4</td><td>导出脱敏规则信息_20210629063449</td></tr><tr><td>5</td><td>a (1).pcap</td></tr></table>
+    
+    <form action="clear.php" method="post"
+    enctype="multipart/form-data">
+    <button type="submit" id = "clear">
+    删除所有文件
+    </button>
+    </form>
+    
+    <form action="download_file.php" method="post"
+    enctype="multipart/form-data">
+    <input type="text" name="downfile" id="downfile" /> 
+    <button type="submit" id = "clear">
+    下载
+    </button>
+    </form>
+    
+    <script src="./test.js"></script>
+    
+    
+    
+    
+    
+    </body>
+    </html>
